@@ -19,9 +19,9 @@ export function GoalInput({
         25個の目標を入力してください
       </p>
 
-      <div className="grid grid-cols-5 gap-2 sm:grid-cols-3 sm:gap-1.5">
+      <div className="grid grid-cols-5 gap-2">
         {goals.map((goal, index) => (
-          <div key={index} className="relative">
+          <div key={index} className="relative aspect-square">
             <label className="absolute -top-2 left-2 text-xs text-white/60 bg-white/10 px-1.5 rounded z-10">
               {index + 1}
             </label>
@@ -31,7 +31,7 @@ export function GoalInput({
               onChange={(e) => onGoalChange(index, e.target.value)}
               placeholder={`目標 ${index + 1}`}
               className="
-                w-full px-3 py-2.5 text-sm
+                w-full h-full p-1 text-xs text-center
                 bg-white/30 backdrop-blur-sm
                 border border-white/40 rounded-lg
                 text-white placeholder:text-white/40
