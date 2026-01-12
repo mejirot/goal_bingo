@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import './BingoResult.css';
 
 interface BingoResultProps {
   completedCellCount: number;
@@ -28,35 +27,52 @@ export function BingoResult({
   const progressPercentage = (completedCellCount / 25) * 100;
 
   return (
-    <div className="bingo-result">
-      <div className="bingo-result-progress">
-        <div className="progress-bar">
+    <div className="glass-card p-5 space-y-4">
+      {/* プログレスバー */}
+      <div className="space-y-2">
+        <div className="h-3 bg-white/20 rounded-full overflow-hidden">
           <div
-            className="progress-fill"
+            className="h-full bg-gradient-to-r from-success-400 to-success-500 rounded-full transition-all duration-300 ease-out"
             style={{ width: `${progressPercentage}%` }}
           />
         </div>
-        <p className="progress-text">
+        <p className="text-white/90 text-sm text-center">
           達成: {completedCellCount}/25マス ({Math.round(progressPercentage)}%)
         </p>
       </div>
 
-      <div className="bingo-result-lines">
-        <p className="lines-text">
-          ビンゴ: <span className="lines-count">{completedLineCount}</span>/12ライン
+      {/* ライン数 */}
+      <div className="text-center">
+        <p className="text-white/90">
+          ビンゴ:{' '}
+          <span className="text-2xl font-bold text-amber-300 drop-shadow-[0_0_10px_rgba(251,191,36,0.5)]">
+            {completedLineCount}
+          </span>
+          /12ライン
         </p>
       </div>
 
+      {/* ビンゴ達成演出 */}
       {isBingo && (
-        <div className={`bingo-celebration ${showCelebration ? 'animate' : ''}`}>
-          <span className="celebration-emoji">🎉</span>
-          <span className="celebration-text">BINGO!</span>
-          <span className="celebration-emoji">🎉</span>
+        <div
+          className={`
+            bg-gradient-to-r from-amber-500/80 to-orange-500/80
+            rounded-xl p-4 text-center
+            shadow-[0_0_30px_rgba(251,191,36,0.6)]
+            ${showCelebration ? 'animate-bounce' : ''}
+          `}
+        >
+          <span className="text-3xl animate-bounce inline-block">🎉</span>
+          <span className="text-2xl font-bold text-white mx-3 tracking-widest drop-shadow-lg">
+            BINGO!
+          </span>
+          <span className="text-3xl animate-bounce inline-block">🎉</span>
         </div>
       )}
 
+      {/* ライン達成通知 */}
       {showCelebration && !isBingo && completedLineCount > 0 && (
-        <div className="line-complete-message">
+        <div className="bg-gradient-to-r from-primary-500/80 to-primary-600/80 rounded-xl p-3 text-center text-white font-bold animate-pulse">
           {completedLineCount}ライン達成!
         </div>
       )}
