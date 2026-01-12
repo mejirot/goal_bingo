@@ -28,16 +28,16 @@ export function BingoCell({
   // 状態に応じたスタイル
   const stateClasses = completed
     ? `
-        bg-gradient-to-br from-success-500/80 to-success-600/80
-        border-2 border-success-400 text-white
-        shadow-[0_0_20px_rgba(34,197,94,0.5)]
+        bg-gradient-to-br from-emerald-400 to-emerald-500
+        border-2 border-emerald-300 text-white
+        shadow-[0_0_15px_rgba(34,197,94,0.4)]
       `
     : `
-        bg-white/30 backdrop-blur-sm
-        border-2 border-white/40
-        hover:bg-white/40 hover:border-white/60 hover:scale-[1.02]
+        bg-sky-50/80 backdrop-blur-sm
+        border-2 border-sky-200 text-slate-700
+        hover:bg-sky-100 hover:border-sky-300 hover:scale-[1.02]
         active:scale-[0.98]
-        focus:outline-none focus:ring-2 focus:ring-white/50
+        focus:outline-none focus:ring-2 focus:ring-sky-300
       `;
 
   // ハイライト（ビンゴライン）スタイル

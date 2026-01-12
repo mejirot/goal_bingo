@@ -15,28 +15,28 @@ export function GoalInput({
 
   return (
     <div className="glass-card p-5 space-y-5">
-      <p className="text-white/90 text-center text-lg font-medium">
+      <p className="text-slate-700 text-center text-lg font-medium">
         25個の目標を入力してください
       </p>
 
       <div className="grid grid-cols-5 gap-2">
         {goals.map((goal, index) => (
           <div key={index} className="relative aspect-square">
-            <label className="absolute -top-2 left-2 text-xs text-white/60 bg-white/10 px-1.5 rounded z-10">
+            <label className="absolute -top-2 left-2 text-xs text-slate-500 bg-sky-200/60 px-1.5 rounded z-10">
               {index + 1}
             </label>
-            <input
-              type="text"
+            <textarea
               value={goal}
               onChange={(e) => onGoalChange(index, e.target.value)}
               placeholder={`目標 ${index + 1}`}
               className="
                 w-full h-full p-1 text-xs text-center
-                bg-white/30 backdrop-blur-sm
-                border border-white/40 rounded-lg
-                text-white placeholder:text-white/40
-                focus:border-primary-400 focus:ring-2 focus:ring-primary-400/30
+                bg-sky-100/50 backdrop-blur-sm
+                border border-sky-300/60 rounded-lg
+                text-slate-700 placeholder:text-slate-400
+                focus:border-sky-400 focus:ring-2 focus:ring-sky-400/30
                 focus:outline-none transition-all duration-200
+                resize-none
               "
             />
           </div>
@@ -44,9 +44,9 @@ export function GoalInput({
       </div>
 
       <div className="flex flex-col items-center gap-4">
-        <p className="text-white/80 text-sm">
+        <p className="text-slate-600 text-sm">
           入力済み:{' '}
-          <span className={`font-bold ${filledCount === 25 ? 'text-success-400' : 'text-amber-300'}`}>
+          <span className={`font-bold ${filledCount === 25 ? 'text-emerald-600' : 'text-amber-600'}`}>
             {filledCount}
           </span>
           /25
@@ -57,14 +57,14 @@ export function GoalInput({
             transition-all duration-300
             ${canComplete
               ? `
-                bg-gradient-to-r from-primary-500 to-primary-600
+                bg-gradient-to-r from-sky-500 to-blue-500
                 text-white shadow-lg
-                hover:from-primary-600 hover:to-primary-700
+                hover:from-sky-600 hover:to-blue-600
                 hover:scale-105 hover:shadow-xl
                 active:scale-95
               `
               : `
-                bg-white/20 text-white/50
+                bg-slate-200 text-slate-400
                 cursor-not-allowed
               `
             }

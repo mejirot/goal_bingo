@@ -35,7 +35,7 @@ export function SharePanel({ card }: SharePanelProps) {
   return (
     <div className="glass-card p-4">
       <button
-        className="w-full glass-button px-6 py-3 text-white font-medium"
+        className="w-full glass-button px-6 py-3 text-slate-700 font-medium"
         onClick={handleToggle}
       >
         {isOpen ? '閉じる' : '共有する'}
@@ -43,7 +43,7 @@ export function SharePanel({ card }: SharePanelProps) {
 
       {isOpen && (
         <div className="mt-4 space-y-4">
-          <p className="text-white/80 text-sm text-center">
+          <p className="text-slate-600 text-sm text-center">
             このURLを共有すると、同じビンゴカードを開けます
           </p>
 
@@ -52,10 +52,10 @@ export function SharePanel({ card }: SharePanelProps) {
               type="text"
               className="
                 share-url-input flex-1 px-3 py-2.5 text-sm
-                bg-white/30 backdrop-blur-sm
-                border border-white/40 rounded-lg
-                text-white
-                focus:border-primary-400 focus:ring-2 focus:ring-primary-400/30
+                bg-sky-50 backdrop-blur-sm
+                border border-sky-300 rounded-lg
+                text-slate-700
+                focus:border-sky-400 focus:ring-2 focus:ring-sky-400/30
                 focus:outline-none
               "
               value={shareUrl}
@@ -67,8 +67,8 @@ export function SharePanel({ card }: SharePanelProps) {
                 px-5 py-2.5 rounded-lg font-medium
                 transition-all duration-200
                 ${copied
-                  ? 'bg-success-500 text-white'
-                  : 'bg-primary-500 text-white hover:bg-primary-600'
+                  ? 'bg-emerald-500 text-white'
+                  : 'bg-sky-500 text-white hover:bg-sky-600'
                 }
               `}
               onClick={handleCopy}
@@ -78,7 +78,7 @@ export function SharePanel({ card }: SharePanelProps) {
           </div>
 
           <div className="flex flex-col items-center gap-3 pt-2">
-            <p className="text-white/70 text-sm">QRコード</p>
+            <p className="text-slate-500 text-sm">QRコード</p>
             <div className="bg-white p-3 rounded-xl">
               <QRCodeSVG value={shareUrl} size={160} level="M" />
             </div>

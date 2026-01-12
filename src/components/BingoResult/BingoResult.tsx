@@ -30,22 +30,22 @@ export function BingoResult({
     <div className="glass-card p-5 space-y-4">
       {/* プログレスバー */}
       <div className="space-y-2">
-        <div className="h-3 bg-white/20 rounded-full overflow-hidden">
+        <div className="h-3 bg-slate-200 rounded-full overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-success-400 to-success-500 rounded-full transition-all duration-300 ease-out"
+            className="h-full bg-gradient-to-r from-emerald-400 to-emerald-500 rounded-full transition-all duration-300 ease-out"
             style={{ width: `${progressPercentage}%` }}
           />
         </div>
-        <p className="text-white/90 text-sm text-center">
+        <p className="text-slate-600 text-sm text-center">
           達成: {completedCellCount}/25マス ({Math.round(progressPercentage)}%)
         </p>
       </div>
 
       {/* ライン数 */}
       <div className="text-center">
-        <p className="text-white/90">
+        <p className="text-slate-600">
           ビンゴ:{' '}
-          <span className="text-2xl font-bold text-amber-300 drop-shadow-[0_0_10px_rgba(251,191,36,0.5)]">
+          <span className="text-2xl font-bold text-sky-600">
             {completedLineCount}
           </span>
           /12ライン
@@ -72,7 +72,7 @@ export function BingoResult({
 
       {/* ライン達成通知 */}
       {showCelebration && !isBingo && completedLineCount > 0 && (
-        <div className="bg-gradient-to-r from-primary-500/80 to-primary-600/80 rounded-xl p-3 text-center text-white font-bold animate-pulse">
+        <div className="bg-gradient-to-r from-sky-500 to-blue-500 rounded-xl p-3 text-center text-white font-bold animate-pulse">
           {completedLineCount}ライン達成!
         </div>
       )}
