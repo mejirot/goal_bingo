@@ -1,0 +1,1 @@
+export { BingoCell } from './BingoCell';

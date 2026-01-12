@@ -1,0 +1,1 @@
+export { BingoResult } from './BingoResult';
