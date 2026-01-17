@@ -48,12 +48,12 @@ export function GoalInput({
   };
 
   return (
-    <div className="glass-card p-5 space-y-5">
+    <div className="space-y-5">
       <p className="text-slate-700 text-center text-lg font-medium">
         25個の目標を入力してください
       </p>
 
-      <div className="grid grid-cols-5 gap-2">
+      <div className="glass-card grid grid-cols-5 gap-2 p-4 max-w-[650px] mx-auto sm:gap-1 sm:p-3">
         {goals.map((goal, index) => (
           <div key={index} className="relative aspect-square">
             <label className="absolute -top-2 left-2 text-xs text-slate-500 bg-sky-200/60 px-1.5 rounded z-10">
@@ -64,13 +64,14 @@ export function GoalInput({
               onChange={(e) => onGoalChange(index, e.target.value)}
               placeholder={`目標 ${index + 1}`}
               className="
-                w-full h-full p-1 text-xs text-center
+                w-full h-full p-1.5 text-[0.85rem] leading-snug text-center
                 bg-sky-100/50 backdrop-blur-sm
-                border border-sky-300/60 rounded-lg
+                border-2 border-sky-200 rounded-xl
                 text-slate-700 placeholder:text-slate-400
                 focus:border-sky-400 focus:ring-2 focus:ring-sky-400/30
                 focus:outline-none transition-all duration-200
                 resize-none
+                sm:text-[0.7rem]
               "
             />
           </div>

@@ -16,7 +16,7 @@ export function BingoBoard({
 
   return (
     <div
-      className="glass-card grid grid-cols-5 gap-2 p-4 max-w-[500px] mx-auto sm:gap-1 sm:p-3"
+      className="glass-card grid grid-cols-5 gap-2 p-4 max-w-[650px] mx-auto sm:gap-1 sm:p-3"
       role="grid"
       aria-label="ビンゴカード 5×5マス"
     >

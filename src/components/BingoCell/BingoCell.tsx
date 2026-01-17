@@ -19,7 +19,7 @@ export function BingoCell({
   // 基本スタイル
   const baseClasses = `
     flex flex-col items-center justify-center
-    aspect-square p-2 rounded-xl
+    aspect-square p-1.5 rounded-xl
     cursor-pointer transition-all duration-200
     relative overflow-hidden
     font-inherit text-inherit
@@ -57,7 +57,7 @@ export function BingoCell({
       aria-label={ariaLabel}
       aria-pressed={completed}
     >
-      <span className="text-[0.7rem] leading-tight text-center break-words line-clamp-4 sm:text-[0.6rem] sm:line-clamp-3">
+      <span className="text-[0.85rem] leading-snug text-center break-words whitespace-pre-line sm:text-[0.7rem]">
         {goal}
       </span>
       {completed && (
