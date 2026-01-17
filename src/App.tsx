@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { BingoBoard } from './components/BingoBoard';
 import { BingoResult } from './components/BingoResult';
 import { GoalInput } from './components/GoalInput';
 import { SharePanel } from './components/SharePanel';
+import { ImageExportButton } from './components/ImageExportButton';
 import { useBingoState } from './hooks/useBingoState';
 import { getInitialState, useAutoSave } from './hooks/useLocalStorage';
 import { getCardFromUrl, clearShareParam } from './utils/shareUtils';
@@ -31,6 +32,7 @@ function getStartupState(): AppState {
 function App() {
   const [isInitialized, setIsInitialized] = useState(false);
   const { state, actions, computed } = useBingoState(getStartupState());
+  const bingoBoardRef = useRef<HTMLDivElement>(null);
 
   // 初期化完了をマーク（URL復元の二重実行防止）
   useEffect(() => {
@@ -75,6 +77,7 @@ function App() {
           ) : (
             <>
               <BingoBoard
+                ref={bingoBoardRef}
                 card={state.card}
                 highlightedCells={computed.highlightedCells}
                 onCellClick={actions.toggleComplete}
@@ -93,6 +96,7 @@ function App() {
                 >
                   目標を編集する
                 </button>
+                <ImageExportButton targetRef={bingoBoardRef} />
               </div>
 
               <SharePanel card={state.card} />
