@@ -68,6 +68,7 @@ function App() {
             <GoalInput
               goals={state.card.goals}
               onGoalChange={actions.setGoal}
+              onGoalsImport={actions.setGoals}
               onComplete={handleStartPlay}
               canComplete={computed.canStartPlay}
             />

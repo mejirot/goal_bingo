@@ -1,6 +1,14 @@
+import {
+  goalsToMarkdown,
+  downloadMarkdown,
+  parseMarkdownToGoals,
+  readFileAsText,
+} from '../../utils/exportUtils';
+
 interface GoalInputProps {
   goals: string[];
   onGoalChange: (index: number, text: string) => void;
+  onGoalsImport: (goals: string[]) => void;
   onComplete: () => void;
   canComplete: boolean;
 }
@@ -8,10 +16,36 @@ interface GoalInputProps {
 export function GoalInput({
   goals,
   onGoalChange,
+  onGoalsImport,
   onComplete,
   canComplete,
 }: GoalInputProps) {
   const filledCount = goals.filter((g) => g.trim() !== '').length;
+
+  const handleExport = () => {
+    const markdown = goalsToMarkdown(goals);
+    downloadMarkdown(markdown);
+  };
+
+  const handleImport = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const content = await readFileAsText(file);
+      const parsed = parseMarkdownToGoals(content);
+      if (parsed) {
+        onGoalsImport(parsed);
+      } else {
+        alert('ファイルから目標を読み込めませんでした。');
+      }
+    } catch {
+      alert('ファイルの読み込みに失敗しました。');
+    }
+
+    // input をリセット（同じファイルを再選択可能に）
+    e.target.value = '';
+  };
 
   return (
     <div className="glass-card p-5 space-y-5">
@@ -51,6 +85,26 @@ export function GoalInput({
           </span>
           /25
         </p>
+
+        {/* インポート/エクスポートボタン */}
+        <div className="flex gap-3 w-full max-w-md">
+          <label className="glass-button flex-1 px-4 py-2 text-slate-700 font-medium text-sm text-center cursor-pointer hover:scale-105 transition-transform">
+            .mdインポート
+            <input
+              type="file"
+              accept=".md"
+              className="hidden"
+              onChange={handleImport}
+            />
+          </label>
+          <button
+            className="glass-button flex-1 px-4 py-2 text-slate-700 font-medium text-sm hover:scale-105 transition-transform"
+            onClick={handleExport}
+          >
+            .mdエクスポート
+          </button>
+        </div>
+
         <button
           className={`
             w-full max-w-xs px-6 py-3 rounded-xl font-bold text-lg
