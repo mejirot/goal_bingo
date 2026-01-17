@@ -1,46 +1,18 @@
-import { useEffect, useState, useRef } from 'react';
+import { useRef } from 'react';
 import { BingoBoard } from './components/BingoBoard';
 import { BingoResult } from './components/BingoResult';
 import { GoalInput } from './components/GoalInput';
-import { SharePanel } from './components/SharePanel';
 import { ImageExportButton } from './components/ImageExportButton';
 import { useBingoState } from './hooks/useBingoState';
 import { getInitialState, useAutoSave } from './hooks/useLocalStorage';
-import { getCardFromUrl, clearShareParam } from './utils/shareUtils';
-import type { AppState } from './types/bingo';
-
-/**
- * 初期状態を決定する
- * 優先順位: URLパラメータ > localStorage > 新規作成
- */
-function getStartupState(): AppState {
-  // URLパラメータからカードを復元
-  const sharedCard = getCardFromUrl();
-  if (sharedCard) {
-    // URLパラメータをクリア（履歴を汚さないため）
-    clearShareParam();
-    return {
-      card: sharedCard,
-      mode: 'play', // 共有カードはプレイモードで開く
-    };
-  }
-
-  // localStorageから復元、またはデフォルト
-  return getInitialState();
-}
+import { goalsToMarkdown, downloadMarkdown } from './utils/exportUtils';
 
 function App() {
-  const [isInitialized, setIsInitialized] = useState(false);
-  const { state, actions, computed } = useBingoState(getStartupState());
+  const { state, actions, computed } = useBingoState(getInitialState());
   const bingoBoardRef = useRef<HTMLDivElement>(null);
 
-  // 初期化完了をマーク（URL復元の二重実行防止）
-  useEffect(() => {
-    setIsInitialized(true);
-  }, []);
-
-  // 状態が変更されるたびに自動保存（初期化後のみ）
-  useAutoSave(isInitialized ? state : getInitialState());
+  // 状態が変更されるたびに自動保存
+  useAutoSave(state);
 
   const handleStartPlay = () => {
     actions.setMode('play');
@@ -48,6 +20,11 @@ function App() {
 
   const handleBackToInput = () => {
     actions.setMode('input');
+  };
+
+  const handleExportMarkdown = () => {
+    const markdown = goalsToMarkdown(state.card.goals);
+    downloadMarkdown(markdown);
   };
 
   return (
@@ -97,9 +74,13 @@ function App() {
                   目標を編集する
                 </button>
                 <ImageExportButton targetRef={bingoBoardRef} />
+                <button
+                  className="glass-button px-6 py-3 text-slate-700 font-medium hover:scale-105"
+                  onClick={handleExportMarkdown}
+                >
+                  .mdエクスポート
+                </button>
               </div>
-
-              <SharePanel card={state.card} />
             </>
           )}
         </main>

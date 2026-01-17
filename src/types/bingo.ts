@@ -21,13 +21,6 @@ export interface AppState {
 /** ビンゴラインの定義（インデックスの配列） */
 export type BingoLine = CellIndex[];
 
-/** 共有用エンコードデータ */
-export interface ShareData {
-  g: string[];    // goals
-  c: boolean[];   // completed
-  v: number;      // version
-}
-
 /** 空のビンゴカードを作成 */
 export function createEmptyCard(): BingoCard {
   return {
